@@ -5,7 +5,7 @@ using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Util;
 
-namespace SudokuBotLibrary.ComputerVision
+namespace SudokuLibrary.ComputerVision
 {
     class GameFieldRecognizer
     {

@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 
-namespace SudokuBotLibrary.WPF
+namespace SudokuLibrary.WPF
 {
     public static class BitmapSourceConvert
     {

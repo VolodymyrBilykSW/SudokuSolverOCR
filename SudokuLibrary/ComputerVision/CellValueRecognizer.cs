@@ -5,7 +5,7 @@ using Emgu.CV.OCR;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 
-namespace SudokuBotLibrary.ComputerVision
+namespace SudokuLibrary.ComputerVision
 {
     class CellValueRecognizer
     {

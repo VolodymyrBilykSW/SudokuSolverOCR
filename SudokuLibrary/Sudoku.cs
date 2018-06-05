@@ -2,10 +2,10 @@
 using Emgu.CV.Structure;
 using System;
 using System.Drawing;
-using SudokuBotLibrary.ComputerVision;
+using SudokuLibrary.ComputerVision;
 using Emgu.CV.CvEnum;
 
-namespace SudokuBotLibrary
+namespace SudokuLibrary
 {
     class Sudoku
     {

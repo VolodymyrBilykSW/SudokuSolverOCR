@@ -4,8 +4,6 @@ using Emgu.CV;
 using Emgu.CV.OCR;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace SudokuBotLibrary.ComputerVision
 {
@@ -23,7 +21,7 @@ namespace SudokuBotLibrary.ComputerVision
             }
             catch (Exception)
             {
-                throw new Exception("Tessaract Error. Don`t have a file and can`t to download it.\n Maybe bad language name");
+                throw new InvalidOperationException("Tessaract Error. Don`t have a file and can`t to download it.");
             }
 
             _ocr = new Tesseract(dir, lang, OcrEngineMode.TesseractOnly, "123456789");
@@ -44,7 +42,7 @@ namespace SudokuBotLibrary.ComputerVision
 
             if (_ocr.Recognize() != 0)
             {
-                throw new Exception("Tessaract Error. Can`t to recognize cell image");
+                throw new InvalidOperationException("Tessaract Error. Can`t to recognize cell image");
             }
 
             Tesseract.Character[] characters = _ocr.GetCharacters();

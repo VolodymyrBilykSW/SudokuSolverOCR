@@ -3,6 +3,7 @@ using Emgu.CV.Structure;
 using System;
 using System.Drawing;
 using SudokuBotLibrary.ComputerVision;
+using Emgu.CV.CvEnum;
 
 namespace SudokuBotLibrary
 {
@@ -20,13 +21,14 @@ namespace SudokuBotLibrary
             Size = size;
             Field = field;
             Matrix = new Cell[Size, Size];
+
+            RecognizeDigits();
+            Matrix = new SudokuSolver().Calculate(Matrix);
         }
 
 
         public Image<Bgr, Byte> GetResultImage()
         {
-            RecognizeDigits();
-            Matrix = new SudokuSolver().Calculate(Matrix);
             DrawDigits();
 
             return Field;
@@ -86,6 +88,51 @@ namespace SudokuBotLibrary
                     }
                 }
             }
+        }
+
+
+        private Image<Bgr, byte> GetLightResult()
+        {
+            const int SIZE = 271;
+            const int KVADRANT = SIZE / 9;
+            var resultImage = new Image<Bgr, byte>(SIZE, SIZE, new Bgr(Color.White));
+
+
+            // Drawing empty field
+            for (int i = 0; i <= SIZE; i += KVADRANT)
+            {
+                int thickness = 1;
+                if (i % (KVADRANT * 3) == 0 || i == 0 || i == SIZE - 1)
+                    thickness = 2;
+
+                Point[] points = new Point[] { new Point(0, i), new Point(SIZE, i) };
+                resultImage.DrawPolyline(points, false, new Bgr(Color.Black), thickness);
+
+                points = new Point[] { new Point(i, 0), new Point(i, SIZE) };
+                resultImage.DrawPolyline(points, false, new Bgr(Color.Black), thickness);
+            }
+
+            // Drawing digits
+            for (int yi = 0; yi < Size; yi++)
+            {
+                for (int xi = 0; xi < Size; xi++)
+                {
+                    var leftBottom = new Point(xi * KVADRANT, (yi + 1) * KVADRANT);
+
+                    if (Matrix[xi, yi].Preset)
+                    {
+                        // draw preset values
+                        resultImage.Draw(Matrix[xi, yi].Value.ToString(), leftBottom, FontFace.HersheyPlain, 2, new Bgr(Color.Black));
+                    }
+                    else
+                    {
+                        // draw calculated values
+                        resultImage.Draw(Matrix[xi, yi].Value.ToString(), leftBottom, FontFace.HersheyPlain, 2, new Bgr(Color.Green));
+                    }
+                }
+            }
+
+            return resultImage;
         }
     }
 }

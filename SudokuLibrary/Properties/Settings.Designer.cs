@@ -23,110 +23,119 @@ namespace SudokuLibrary.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2000")]
         public int MAXSIZE {
             get {
                 return ((int)(this["MAXSIZE"]));
             }
-            set {
+            set
+            {
                 this["MAXSIZE"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("360")]
         public int RSIZE {
             get {
                 return ((int)(this["RSIZE"]));
             }
-            set {
+            set
+            {
                 this["RSIZE"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
         public int TRESHOLD_MIN {
             get {
                 return ((int)(this["TRESHOLD_MIN"]));
             }
-            set {
+            set
+            {
                 this["TRESHOLD_MIN"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public int TRESHOLD_MAX {
             get {
                 return ((int)(this["TRESHOLD_MAX"]));
             }
-            set {
+            set
+            {
                 this["TRESHOLD_MAX"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool L2Gradient {
             get {
                 return ((bool)(this["L2Gradient"]));
             }
-            set {
+            set
+            {
                 this["L2Gradient"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("HersheyPlain")]
         public global::Emgu.CV.CvEnum.FontFace FONT {
             get {
                 return ((global::Emgu.CV.CvEnum.FontFace)(this["FONT"]));
             }
-            set {
+            set
+            {
                 this["FONT"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
         public int FONTSIZE {
             get {
                 return ((int)(this["FONTSIZE"]));
             }
-            set {
+            set
+            {
                 this["FONTSIZE"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int FONTSIZEPR {
             get {
                 return ((int)(this["FONTSIZEPR"]));
             }
-            set {
+            set
+            {
                 this["FONTSIZEPR"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ChainApproxNone")]
         public global::Emgu.CV.CvEnum.ChainApproxMethod CHAINAPPROX {
             get {
                 return ((global::Emgu.CV.CvEnum.ChainApproxMethod)(this["CHAINAPPROX"]));
             }
-            set {
+            set
+            {
                 this["CHAINAPPROX"] = value;
             }
         }

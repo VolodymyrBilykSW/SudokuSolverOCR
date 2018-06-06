@@ -2,31 +2,31 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SudokuLibrary.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="MAXSIZE" Type="System.Int32" Scope="User">
+    <Setting Name="MAXSIZE" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">2000</Value>
     </Setting>
-    <Setting Name="RSIZE" Type="System.Int32" Scope="User">
+    <Setting Name="RSIZE" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">360</Value>
     </Setting>
-    <Setting Name="TRESHOLD_MIN" Type="System.Int32" Scope="User">
+    <Setting Name="TRESHOLD_MIN" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">50</Value>
     </Setting>
-    <Setting Name="TRESHOLD_MAX" Type="System.Int32" Scope="User">
+    <Setting Name="TRESHOLD_MAX" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">100</Value>
     </Setting>
-    <Setting Name="L2Gradient" Type="System.Boolean" Scope="User">
+    <Setting Name="L2Gradient" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="FONT" Type="Emgu.CV.CvEnum.FontFace" Scope="User">
+    <Setting Name="FONT" Type="Emgu.CV.CvEnum.FontFace" Scope="Application">
       <Value Profile="(Default)">HersheyPlain</Value>
     </Setting>
-    <Setting Name="FONTSIZE" Type="System.Int32" Scope="User">
+    <Setting Name="FONTSIZE" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="FONTSIZEPR" Type="System.Int32" Scope="User">
+    <Setting Name="FONTSIZEPR" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="CHAINAPPROX" Type="Emgu.CV.CvEnum.ChainApproxMethod" Scope="User">
+    <Setting Name="CHAINAPPROX" Type="Emgu.CV.CvEnum.ChainApproxMethod" Scope="Application">
       <Value Profile="(Default)">ChainApproxNone</Value>
     </Setting>
   </Settings>

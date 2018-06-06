@@ -9,29 +9,29 @@ namespace SudokuLibrary
 {
     public class Sudoku
     {
-        public Image<Bgr, Byte> Field { get; private set; }
+        private Image<Bgr, Byte> Field;
 
         public Cell[,] Matrix { get; private set; }
 
         public int Size { get; private set; }
 
 
-        public Sudoku(Image<Bgr, Byte> field, int size = 9)
+        public Sudoku(Bitmap image, int size = 9)
         {
             Size = size;
-            Field = field;
             Matrix = new Cell[Size, Size];
 
+            Field = GameFieldRecognizer.Recognize(image);
             RecognizeDigits();
             Matrix = new SudokuSolver().Calculate(Matrix);
         }
 
 
-        public Image<Bgr, Byte> GetResultImage()
+        public Bitmap GetResultImage()
         {
             DrawDigits();
 
-            return Field;
+            return Field.ToBitmap();
         }
 
         // Get digits from sudoky image field.
@@ -91,7 +91,7 @@ namespace SudokuLibrary
         }
 
 
-        private Image<Bgr, byte> GetLightResult()
+        public Bitmap GetLightResult()
         {
             const int SIZE = 271;
             const int KVADRANT = SIZE / 9;
@@ -132,7 +132,7 @@ namespace SudokuLibrary
                 }
             }
 
-            return resultImage;
+            return resultImage.ToBitmap();
         }
     }
 }

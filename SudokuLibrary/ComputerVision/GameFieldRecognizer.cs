@@ -9,7 +9,7 @@ namespace SudokuLibrary.ComputerVision
 {
     public class GameFieldRecognizer
     {
-        public static Image<Bgr, Byte> Recognize(string path2photo)
+        public static Image<Bgr, Byte> Recognize(Bitmap bmp)
         {
             // Max size for input image, if it`s more then resize image
             int MAXSIZE = Properties.Settings.Default.MAXSIZE; //2000;
@@ -22,7 +22,7 @@ namespace SudokuLibrary.ComputerVision
 
 
             // Load the image from file and resize it
-            var photo = new Image<Bgr, Byte>(path2photo);
+            var photo = new Image<Bgr, Byte>(bmp);
             if (photo.Width > MAXSIZE && photo.Height > MAXSIZE)
                 photo = photo.Resize(MAXSIZE, MAXSIZE * photo.Width / photo.Height, Inter.Linear, true);
 

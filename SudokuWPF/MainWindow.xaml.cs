@@ -3,6 +3,7 @@ using System.Windows;
 using SudokuLibrary;
 using SudokuLibrary.WPF;
 using SudokuLibrary.ComputerVision;
+using System.Drawing;
 
 namespace SudokuWPF
 {
@@ -35,11 +36,11 @@ namespace SudokuWPF
             {
                 try
                 {
-                    var gameField = GameFieldRecognizer.Recognize(openImage.FileName);
-                    var resImg = new Sudoku(gameField).GetResultImage();
+                    var bmp = new Bitmap(openImage.FileName);
+                    var resImg = new Sudoku(bmp).GetResultImage();
 
                     var resultWin = new ImageViewer() { Title = "Game field" };
-                    resultWin.image.Source = resImg.ToBitmapSource();
+                    resultWin.image.Source = resImg.ToBitmap();
                     resultWin.Show();
                 }
                 catch (System.Exception error)

@@ -13,8 +13,6 @@ namespace SudokuBot
     [Serializable]
     public class BotDialog : IDialog<object>
     {
-        protected int count = 1;
-
         public async Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
@@ -23,17 +21,6 @@ namespace SudokuBot
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             var message = await argument;
-
-            // TODO
-            if (message.Text == "reset")
-            {
-                PromptDialog.Confirm(
-                    context,
-                    AfterResetAsync,
-                    "Are you sure you want to reset the count?",
-                    "Didn't get that!",
-                    promptStyle: PromptStyle.Auto);
-            }
 
             var replyMessage = context.MakeMessage();
             replyMessage.Text = "Hi. Just send me image with game=)";
@@ -71,10 +58,9 @@ namespace SudokuBot
 
                     replyMessage.Text = "It`s your answer";
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    await context.PostAsync("Sorry, There`s some problem.\n Try to send another image");
-                    await context.PostAsync($"Error. Source: { e.Source}, Message: { e.Message}");
+                    await context.PostAsync("Sorry, There`s some problem.\n Try send another one image");
                 }
             }
 
@@ -82,21 +68,5 @@ namespace SudokuBot
             await context.PostAsync(replyMessage);
             context.Wait(MessageReceivedAsync);
         }
-
-        public async Task AfterResetAsync(IDialogContext context, IAwaitable<bool> argument)
-        {
-            var confirm = await argument;
-            if (confirm)
-            {
-                this.count = 1;
-                await context.PostAsync("Reset count.");
-            }
-            else
-            {
-                await context.PostAsync("Did not reset count.");
-            }
-            context.Wait(MessageReceivedAsync);
-        }
-
     }
 }

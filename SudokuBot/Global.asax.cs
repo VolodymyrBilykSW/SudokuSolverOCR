@@ -7,7 +7,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Connector;
 
-namespace SimpleEchoBot
+namespace SudokuBot
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
@@ -36,6 +36,9 @@ namespace SimpleEchoBot
 
                 });
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            // Initilization tessaract
+            SudokuLibrary.ComputerVision.CellValueRecognizer.InitTesseract(Server.MapPath("~/App_Data/tessdata/"));
         }
     }
 }

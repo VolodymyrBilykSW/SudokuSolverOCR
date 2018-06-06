@@ -52,12 +52,11 @@ namespace SudokuBot
                     var memoryStream = new MemoryStream();
                     content.CopyTo(memoryStream);
 
-                    var img = new Bitmap(memoryStream);
+                    var bmp = new Bitmap(memoryStream);
 
 
                     // Processing image
-                    var gameField = GameFieldRecognizer.Recognize(img);
-                    var resImg = new Sudoku(gameField).GetLightResultImage().Bitmap;
+                    var resImg = new Sudoku(bmp).GetLightResult();
 
                     // Add result image to attachment
                     var converter = new ImageConverter();

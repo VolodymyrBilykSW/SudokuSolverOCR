@@ -14,12 +14,11 @@ namespace SudokuLibrary.ComputerVision
 
         public static void InitTesseract(string dir, string lang = "eng")
         {
-            if(dir == null)
-                dir = Directory.GetCurrentDirectory() + @"\tessdata";
+                //dir = Directory.GetCurrentDirectory() + @"\tessdata";
 
             try
             {
-                if (!File.Exists(dir + $"\\{lang}.traineddata"))
+                if (!File.Exists(dir + $"{lang}.traineddata"))
                     TesseractDownloadLangFile(dir, lang);
             }
             catch (Exception)

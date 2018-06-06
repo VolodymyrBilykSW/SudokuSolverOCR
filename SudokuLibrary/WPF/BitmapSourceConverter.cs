@@ -3,8 +3,10 @@
 //----------------------------------------------------------------------------
 
 using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Emgu.CV;
@@ -27,6 +29,17 @@ namespace SudokuLibrary.WPF
         /// </summary>
         /// <param name="image">The Emgu CV Image</param>
         /// <returns>The equivalent BitmapSource</returns>
+
+        public static ImageSource ToImageSource(this Bitmap bitmap)
+        {
+            var handle = bitmap.GetHbitmap();
+            try
+            {
+                return Imaging.CreateBitmapSourceFromHBitmap(handle, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            }
+            finally { DeleteObject(handle); }
+        }
+
         public static BitmapSource ToBitmapSource(this IImage image)
         {
             using (System.Drawing.Bitmap source = image.Bitmap)

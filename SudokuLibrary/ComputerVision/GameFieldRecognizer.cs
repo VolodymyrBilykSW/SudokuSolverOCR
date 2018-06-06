@@ -7,7 +7,7 @@ using Emgu.CV.Util;
 
 namespace SudokuLibrary.ComputerVision
 {
-    class GameFieldRecognizer
+    public class GameFieldRecognizer
     {
         public static Image<Bgr, Byte> Recognize(string path2photo)
         {

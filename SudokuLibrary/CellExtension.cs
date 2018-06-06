@@ -2,7 +2,7 @@
 
 namespace SudokuLibrary
 {
-    static class CellsExtension
+    public static class CellsExtension
     {
         // Creation for each cell list of possible values.
         public static void CreatePossible(this Cell[,] matrix)

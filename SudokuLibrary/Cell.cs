@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace SudokuLibrary
 {
-    struct Cell
+    public struct Cell
     {
         public int Value { get; set; }
 

@@ -7,13 +7,16 @@ using Emgu.CV.CvEnum;
 
 namespace SudokuLibrary.ComputerVision
 {
-    class CellValueRecognizer
+    public class CellValueRecognizer
     {
         private static Tesseract _ocr;
 
-        public static void InitTesseract(string lang = "eng")
+
+        public static void InitTesseract(string dir, string lang = "eng")
         {
-            var dir = Directory.GetCurrentDirectory() + @"\tessdata";
+            if(dir == null)
+                dir = Directory.GetCurrentDirectory() + @"\tessdata";
+
             try
             {
                 if (!File.Exists(dir + $"\\{lang}.traineddata"))

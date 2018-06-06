@@ -7,7 +7,7 @@ using Emgu.CV.CvEnum;
 
 namespace SudokuLibrary
 {
-    class Sudoku
+    public class Sudoku
     {
         public Image<Bgr, Byte> Field { get; private set; }
 

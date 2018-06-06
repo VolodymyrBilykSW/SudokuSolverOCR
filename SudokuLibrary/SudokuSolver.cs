@@ -2,7 +2,7 @@
 
 namespace SudokuLibrary
 {
-    class SudokuSolver
+    public class SudokuSolver
     {
         public int RecurseDeep { get; private set; } = 0;
         public Stopwatch SolvingTime { get; private set; } = new Stopwatch();

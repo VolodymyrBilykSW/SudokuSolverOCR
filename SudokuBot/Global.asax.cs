@@ -38,7 +38,7 @@ namespace SudokuBot
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
             // Initilization tessaract
-            SudokuLibrary.ComputerVision.CellValueRecognizer.InitTesseract(Server.MapPath("~/App_Data/tessdata/"));
+            SudokuLibrary.ComputerVision.CellValueRecognizer.InitTesseract(Server.MapPath("~/App_Data/tessdata"));
         }
     }
 }

@@ -4,6 +4,7 @@ using SudokuLibrary;
 using SudokuLibrary.WPF;
 using SudokuLibrary.ComputerVision;
 using System.Drawing;
+using System.IO;
 
 namespace SudokuWPF
 {
@@ -15,7 +16,8 @@ namespace SudokuWPF
 
             try
             {
-                CellValueRecognizer.InitTesseract();
+                var path = Directory.GetCurrentDirectory() + @"\tessdata";
+                CellValueRecognizer.InitTesseract(path);
             }
             catch (System.Exception error)
             {
@@ -40,7 +42,7 @@ namespace SudokuWPF
                     var resImg = new Sudoku(bmp).GetResultImage();
 
                     var resultWin = new ImageViewer() { Title = "Game field" };
-                    resultWin.image.Source = resImg.ToBitmap();
+                    resultWin.image.Source = resImg.ToImageSource();
                     resultWin.Show();
                 }
                 catch (System.Exception error)
@@ -64,7 +66,7 @@ namespace SudokuWPF
             {
                 try
                 {
-                    var field = GameFieldRecognizer.Recognize(openImage.FileName);
+                    var field = GameFieldRecognizer.Recognize(new Bitmap(openImage.FileName));
 
                     var fieldWin = new ImageViewer() { Title = "Game field" };
                     fieldWin.image.Source = field.ToBitmapSource();

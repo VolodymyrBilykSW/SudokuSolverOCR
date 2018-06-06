@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.IO;
 using SudokuLibrary;
 using System.Drawing;
-using SudokuLibrary.ComputerVision;
 
 namespace SudokuBot
 {

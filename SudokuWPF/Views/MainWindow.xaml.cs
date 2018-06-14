@@ -87,5 +87,16 @@ namespace SudokuWPF
             var settWin = new SettingsWindow();
             settWin.Show();
         }
+
+        private void AboutMenu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var test = new Views.SudokuBoard();
+            test.Show();
+        }
     }
 }

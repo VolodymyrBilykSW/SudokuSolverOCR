@@ -4,6 +4,7 @@ using Emgu.CV;
 using Emgu.CV.OCR;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
+using System.Drawing;
 
 namespace SudokuLibrary.ComputerVision
 {

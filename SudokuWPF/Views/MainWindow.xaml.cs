@@ -38,12 +38,12 @@ namespace SudokuWPF
             {
                 try
                 {
-                    var bmp = new Bitmap(openImage.FileName);
-                    var resImg = new Sudoku(bmp).GetResultImage();
+                    //var bmp = new Bitmap(openImage.FileName);
+                    //var resImg = new Sudoku(bmp).GetResultImage();
 
-                    var resultWin = new ImageViewer() { Title = "Game field" };
-                    resultWin.image.Source = resImg.ToImageSource();
-                    resultWin.Show();
+                    //var resultWin = new ImageViewer() { Title = "Game field" };
+                    //resultWin.image.Source = resImg.ToImageSource();
+                    //resultWin.Show();
                 }
                 catch (System.Exception error)
                 {
@@ -84,8 +84,7 @@ namespace SudokuWPF
 
         private void SettingsMenu_Click(object sender, RoutedEventArgs e)
         {
-            var settWin = new SettingsWindow();
-            settWin.Show();
+            new SettingsWindow().Show();
         }
 
         private void AboutMenu_Click(object sender, RoutedEventArgs e)
@@ -93,10 +92,37 @@ namespace SudokuWPF
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void OpenSudokuBoardBut_Click(object sender, RoutedEventArgs e)
         {
-            var test = new Views.SudokuBoard();
-            test.Show();
+            new Views.SudokuBoard().Show();
+        }
+
+        private void DemonstrationBut_Click(object sender, RoutedEventArgs e)
+        {
+            var openImage = new OpenFileDialog() { Filter = "Image|*.BMP;*.JPG;*.GIF;*.PNG|All files|*.*" };
+            openImage.ShowDialog();
+
+
+            if (openImage.FileName != "")
+            {
+                try
+                {
+                    var bmp = new Bitmap(openImage.FileName);
+
+                    var field = GameFieldRecognizer.Recognize(bmp);
+
+                    var fieldWin = new ImageViewer() { Title = "Game field" };
+                    fieldWin.image.Source = field.ToBitmapSource();
+                    fieldWin.Show();
+                }
+                catch (System.Exception error)
+                {
+                    MessageBox.Show($"Can`t get game field\nSource: {error.Source}\nMessage: {error.Message}",
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

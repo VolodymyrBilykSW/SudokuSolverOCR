@@ -20,6 +20,8 @@ namespace SudokuLibrary.ComputerVision
             var CHAINAPPROX = Properties.Settings.Default.CHAINAPPROX;
             var L2GRADIENT = Properties.Settings.Default.L2Gradient;
 
+            // To correct orientation of input bitmap image
+            bmp.CorectOrientation();
 
             // Load the image from file and resize it
             var photo = new Image<Bgr, Byte>(bmp);
@@ -34,8 +36,6 @@ namespace SudokuLibrary.ComputerVision
             var pyrDown = new UMat();
             CvInvoke.PyrDown(uimage, pyrDown);
             CvInvoke.PyrUp(pyrDown, uimage);
-
-
 
             var cannyEdges = new UMat();
             CvInvoke.Canny(uimage, cannyEdges, 50.0, 100.0, l2Gradient: L2GRADIENT);

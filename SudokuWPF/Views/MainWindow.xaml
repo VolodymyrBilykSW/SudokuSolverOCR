@@ -9,8 +9,8 @@
     <Grid Background="White">
         <Button Content="Calculate" HorizontalAlignment="Left" Margin="60,35,0,0" VerticalAlignment="Top" Width="127" Click="RecognizePhoto_Click" Height="25" FontSize="14" Background="#FFDDDDDD"/>
         <Button Content="Find game field" Margin="60,70,0,0" VerticalAlignment="Top" Click="GetField_Click" HorizontalAlignment="Left" Width="127" Height="25" FontSize="14"/>
-        <Button Content="Open Sudoku board" Margin="60,105,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" Height="25" FontSize="14" Click="Button_Click"/>
-        <Button Content="Demonstration mode" Margin="60,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" Height="25" FontSize="14"/>
+        <Button Content="Open Sudoku board" Margin="60,105,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" Height="25" FontSize="14" Click="OpenSudokuBoardBut_Click"/>
+        <Button Content="Demonstration mode" Margin="60,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" Height="25" FontSize="14" Click="DemonstrationBut_Click"/>
 
 
         <Menu Height="20" VerticalAlignment="Top" Margin="0,0,0,0" Background="#FFB3B3B3" BorderBrush="#FF0E0E0E">

@@ -27,7 +27,7 @@ namespace SudokuWPF.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error");
             }
         }
 
@@ -102,6 +102,19 @@ namespace SudokuWPF.Views
 
                     textBox.Text = cell[i, k].Value.ToString();
                 }
+            }
+        }
+
+        private void CheckButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ReadValues();
+                MessageBox.Show("It`s correct");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
             }
         }
     }

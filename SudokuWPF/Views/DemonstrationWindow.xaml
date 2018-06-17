@@ -1,0 +1,18 @@
+﻿<Window x:Class="SudokuWPF.Views.DemonstrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SudokuWPF.Views"
+        mc:Ignorable="d"
+        Title="DemonstrationWindow" Height="550" Width="450">
+    <Grid>
+        <Grid>
+            <Image Name="image" Margin="0,0,0,100"/>
+        </Grid>
+        <Grid Margin="0,0,0,0" Height="100" VerticalAlignment="Bottom">
+            <Rectangle Fill="LightGray" />
+            <TextBlock x:Name="ExplainBox" Margin="0,0,0,0" TextAlignment="Center" TextWrapping="Wrap" FontSize="20"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -55,7 +55,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitmapExtension.cs" />
+    <Compile Include="Extensions\BitmapExtension.cs" />
+    <Compile Include="Extensions\DrawingExtension.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -63,7 +64,7 @@
     </Compile>
     <Compile Include="WPF\BitmapSourceConverter.cs" />
     <Compile Include="Cell.cs" />
-    <Compile Include="CellExtension.cs" />
+    <Compile Include="Extensions\CellExtension.cs" />
     <Compile Include="ComputerVision\CellValueRecognizer.cs" />
     <Compile Include="ComputerVision\GameFieldRecognizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

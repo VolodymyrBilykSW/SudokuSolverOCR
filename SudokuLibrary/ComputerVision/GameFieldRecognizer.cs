@@ -9,19 +9,53 @@ namespace SudokuLibrary.ComputerVision
 {
     public class GameFieldRecognizer
     {
-        private readonly Image<Bgr, Byte> image;
+        public Image<Bgr, Byte> Image { get; private set; }
 
         public GameFieldRecognizer(Bitmap photo)
         {
             photo.CorectOrientation();
-            image = new Image<Bgr, Byte>(photo);
+            Image = new Image<Bgr, Byte>(photo);
         }
 
-        public Image<Bgr, byte> Recognize(Bitmap bmp)
+        public Image<Bgr, byte> Recognize()
         {
-            var preparedImage = PrepareImage(image);
+            var preparedImage = PrepareImage();
             var contour = FindField(preparedImage);
-            return CutField(image, contour);
+            return CutField(contour);
+        }
+
+
+        public UMat PrepareImage()
+        {
+            // Max size for input image, if it`s more then resize image
+            int MAXSIZE = Properties.Settings.Default.MAXSIZE; //2000;
+            var L2GRADIENT = Properties.Settings.Default.L2Gradient;
+            var thMIN = Properties.Settings.Default.TRESHOLD_MIN;
+            var thMAX = Properties.Settings.Default.TRESHOLD_MAX;
+
+            // Resize image
+            if (Image.Width > MAXSIZE && Image.Height > MAXSIZE)
+            {
+                Image = Image.Resize(MAXSIZE, MAXSIZE * Image.Width / Image.Height, Inter.Linear, true);
+            }
+
+            // Convert the image to grayscale and filter out the noise
+            var uimage = new UMat();
+            CvInvoke.CvtColor(Image, uimage, ColorConversion.Bgr2Gray);
+
+            // Use image pyr to remove noise
+            var pyrDown = new UMat();
+            CvInvoke.PyrDown(uimage, pyrDown);
+            CvInvoke.PyrUp(pyrDown, uimage);
+
+            var cannyEdges = new UMat();
+            CvInvoke.Canny(uimage, cannyEdges, thMIN, thMAX, l2Gradient: L2GRADIENT);
+
+            // Another methods to process image, but worse. Use only one!
+            //CvInvoke.Threshold(uimage, cannyEdges, 50.0, 100.0, ThresholdType.Binary);
+            //CvInvoke.AdaptiveThreshold(uimage, cannyEdges, 50, AdaptiveThresholdType.MeanC, ThresholdType.Binary, 7, 1);
+
+            return cannyEdges;
         }
 
         public PointF[] FindField(UMat edges)
@@ -59,39 +93,7 @@ namespace SudokuLibrary.ComputerVision
             return biggestRectangle;
         }
 
-        public UMat PrepareImage(Image<Bgr, Byte> image)
-        {
-            // Max size for input image, if it`s more then resize image
-            int MAXSIZE = Properties.Settings.Default.MAXSIZE; //2000;
-            
-            var L2GRADIENT = Properties.Settings.Default.L2Gradient;
-
-            // Resize image
-            if (image.Width > MAXSIZE && image.Height > MAXSIZE)
-            {
-                image = image.Resize(MAXSIZE, MAXSIZE * image.Width / image.Height, Inter.Linear, true);
-            }
-
-            // Convert the image to grayscale and filter out the noise
-            var uimage = new UMat();
-            CvInvoke.CvtColor(image, uimage, ColorConversion.Bgr2Gray);
-
-            // Use image pyr to remove noise
-            var pyrDown = new UMat();
-            CvInvoke.PyrDown(uimage, pyrDown);
-            CvInvoke.PyrUp(pyrDown, uimage);
-
-            var cannyEdges = new UMat();
-            CvInvoke.Canny(uimage, cannyEdges, 50.0, 100.0, l2Gradient: L2GRADIENT);
-
-            // Another methods to process image, but worse. Use only one!
-            //CvInvoke.Threshold(uimage, cannyEdges, 50.0, 100.0, ThresholdType.Binary);
-            //CvInvoke.AdaptiveThreshold(uimage, cannyEdges, 50, AdaptiveThresholdType.MeanC, ThresholdType.Binary, 7, 1);
-
-            return cannyEdges;
-        }
-
-        public Image<Bgr, byte> CutField(Image<Bgr, Byte> photo, PointF[] field)
+        public Image<Bgr, byte> CutField(PointF[] field)
         {
             // Size for output image, recommendation: multiples of 9 and 6
             int RSIZE = Properties.Settings.Default.RSIZE; //360;
@@ -101,7 +103,7 @@ namespace SudokuLibrary.ComputerVision
 
             // Transformation sudoky field to rectangle size and aligning the sides
             var M = CvInvoke.GetPerspectiveTransform(field, newCorners);
-            CvInvoke.WarpPerspective(photo, resultField, M, new Size(RSIZE, RSIZE));
+            CvInvoke.WarpPerspective(Image, resultField, M, new Size(RSIZE, RSIZE));
 
             return resultField;
         }

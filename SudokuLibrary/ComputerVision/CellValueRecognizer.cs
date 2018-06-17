@@ -29,6 +29,37 @@ namespace SudokuLibrary.ComputerVision
         }
 
 
+        private static Cell[,] RecognizeDigits(Image<Bgr, Byte> field, int size)
+        {
+            var matrix = new Cell[size, size];
+
+            int width = field.Width / size;
+            int offset = width / 6;
+
+            for (int yi = 0; yi < size; yi++)
+            {
+                for (int xi = 0; xi < size; xi++)
+                {
+                    // get image from centre cell
+                    matrix[xi, yi].Rect = new Rectangle(offset + width * xi, offset + width * yi, width - offset * 2, width - offset * 2);
+
+                    // recognize digit from cell
+                    int digit = CellValueRecognizer.Recognize(field.GetSubRect(matrix[xi, yi].Rect));
+
+                    if (digit == 0)
+                        continue;
+
+                    if (!matrix.IsPossible(xi, yi, digit))
+                        throw new Exception($"Recognition error. Don`t possible value at cell [{xi},{yi}]");
+
+                    matrix[xi, yi].Value = digit;
+                    matrix[xi, yi].Preset = true;
+                }
+            }
+
+            return matrix;
+        }
+
         public static int Recognize(Image<Bgr, Byte> cellImg)
         {
             // Convert the image to grayscale and filter out the noise

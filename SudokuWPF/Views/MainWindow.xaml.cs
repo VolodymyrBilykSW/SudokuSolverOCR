@@ -3,6 +3,7 @@ using System.Windows;
 using SudokuLibrary;
 using SudokuLibrary.WPF;
 using SudokuLibrary.ComputerVision;
+using SudokuLibrary.Extensions;
 using System.Drawing;
 using System.IO;
 
@@ -66,7 +67,7 @@ namespace SudokuWPF
             {
                 try
                 {
-                    var field = GameFieldRecognizer.Recognize(new Bitmap(openImage.FileName));
+                    var field = new GameFieldRecognizer(new Bitmap(openImage.FileName)).TestRecognize(new Bitmap(openImage.FileName));
 
                     var fieldWin = new ImageViewer() { Title = "Game field" };
                     fieldWin.image.Source = field.ToBitmapSource();
@@ -102,27 +103,60 @@ namespace SudokuWPF
             var openImage = new OpenFileDialog() { Filter = "Image|*.BMP;*.JPG;*.GIF;*.PNG|All files|*.*" };
             openImage.ShowDialog();
 
+            if (openImage.FileName == "")
+                return;
 
-            if (openImage.FileName != "")
+            try
             {
-                try
-                {
-                    var bmp = new Bitmap(openImage.FileName);
+                Views.DemonstrationWindow demWin;
 
-                    var field = GameFieldRecognizer.TestRecognize(bmp);
+                var bmp = new Bitmap(openImage.FileName);
+                var gameRecognizer = new GameFieldRecognizer(bmp);
 
-                    var fieldWin = new ImageViewer() { Title = "Game field" };
-                    fieldWin.image.Source = field.ToBitmapSource();
-                    fieldWin.Show();
-                }
-                catch (System.Exception error)
-                {
-                    MessageBox.Show($"Can`t get game field\nSource: {error.Source}\nMessage: {error.Message}",
-                                    "Error",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Error);
-                }
+                // stage 1
+                demWin = new Views.DemonstrationWindow() { Title = "Stage 1. Download Image" };
+                demWin.image.Source = bmp.ToImageSource();
+                demWin.ExplainBox.Text = "Photo which is needed to process and calculate";
+                demWin.ShowDialog();
+
+                // stage 2
+                var preparedImage = gameRecognizer.PrepareImage();
+
+                demWin = new Views.DemonstrationWindow() { Title = "Stage 2. Processing image" };
+                demWin.image.Source = preparedImage.Bitmap.ToImageSource();
+                demWin.ExplainBox.Text = "Photo after processing";
+                demWin.ShowDialog();
+
+                // stage 3
+                var gameContour = gameRecognizer.FindField(preparedImage);
+                
+                demWin = new Views.DemonstrationWindow() { Title = "Stage 3. Finding field" };
+                var img = gameRecognizer.Image.Clone();
+                img.DrawPolyline(gameContour.ToPoints().CorrectOrder(), true, new Emgu.CV.Structure.Bgr(Color.Green), img.Size.Width/100);
+
+                demWin.image.Source = img.ToBitmapSource();
+                demWin.ExplainBox.Text = "Found game field in green rectangle";
+                demWin.ShowDialog();
+
+                // stage 4
+                demWin = new Views.DemonstrationWindow() { Title = "Stage 4. Cutting field" };
+                var gameFieldImg = gameRecognizer.CutField(gameContour).Bitmap;
+                demWin.image.Source = gameFieldImg.ToImageSource();
+                demWin.ExplainBox.Text = "Cut game field from original photo";
+                demWin.ShowDialog();
+
+                // stage 5
+                img = new GameFieldRecognizer(gameFieldImg).Recognize();
+                var sudoku = new Sudoku(gameFieldImg) RecognizeDigits();
             }
+            catch (System.Exception error)
+            {
+                MessageBox.Show($"Some error\nSource: {error.Source}\nMessage: {error.Message}",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
+
         }
     }
 }

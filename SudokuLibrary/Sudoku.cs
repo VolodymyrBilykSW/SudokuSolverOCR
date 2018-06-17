@@ -21,10 +21,12 @@ namespace SudokuLibrary
             Size = size;
             Matrix = new Cell[Size, Size];
 
-            Field = GameFieldRecognizer.Recognize(image);
+            Field = new GameFieldRecognizer(image).Recognize();
             RecognizeDigits();
             Matrix = new SudokuSolver().Calculate(Matrix);
         }
+
+        public Sudoku() { }
 
 
         public Bitmap GetResultImage()
@@ -53,8 +55,8 @@ namespace SudokuLibrary
                     if (digit == 0)
                         continue;
 
-                    //if (!Matrix.isPossible(xi, yi, digit))
-                    //   throw new Exception("Recognition error. Don`t possible value");
+                    if (!Matrix.IsPossible(xi, yi, digit))
+                       throw new Exception($"Recognition error. Don`t possible value at cell [{xi},{yi}]");
 
                     Matrix[xi, yi].Value = digit;
                     Matrix[xi, yi].Preset = true;
@@ -63,7 +65,7 @@ namespace SudokuLibrary
         }
 
         // Drawing preset and calculation values on the Field.
-        private void DrawDigits()
+        public void DrawDigits()
         {
             var FONT = Properties.Settings.Default.FONT;
             var FONTSIZE = Properties.Settings.Default.FONTSIZE;

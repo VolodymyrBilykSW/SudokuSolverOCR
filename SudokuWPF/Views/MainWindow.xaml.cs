@@ -29,7 +29,7 @@ namespace SudokuWPF
             }
         }
 
-        private void RecognizePhoto_Click(object sender, RoutedEventArgs e)
+        private void RecognizeAndSolve_Click(object sender, RoutedEventArgs e)
         {
             var openImage = new OpenFileDialog() { Filter = "Image|*.BMP;*.JPG;*.GIF;*.PNG|All files|*.*" };
             openImage.ShowDialog();
@@ -38,12 +38,12 @@ namespace SudokuWPF
             {
                 try
                 {
-                    //var bmp = new Bitmap(openImage.FileName);
-                    //var resImg = new Sudoku(bmp).GetResultImage();
+                    var bmp = new Bitmap(openImage.FileName);
+                    var resImg = new Sudoku(bmp).GetResultImage();
 
-                    //var resultWin = new ImageViewer() { Title = "Game field" };
-                    //resultWin.image.Source = resImg.ToImageSource();
-                    //resultWin.Show();
+                    var resultWin = new ImageViewer() { Title = "Answer" };
+                    resultWin.image.Source = resImg.ToImageSource();
+                    resultWin.Show();
                 }
                 catch (System.Exception error)
                 {
@@ -109,7 +109,7 @@ namespace SudokuWPF
                 {
                     var bmp = new Bitmap(openImage.FileName);
 
-                    var field = GameFieldRecognizer.Recognize(bmp);
+                    var field = GameFieldRecognizer.TestRecognize(bmp);
 
                     var fieldWin = new ImageViewer() { Title = "Game field" };
                     fieldWin.image.Source = field.ToBitmapSource();

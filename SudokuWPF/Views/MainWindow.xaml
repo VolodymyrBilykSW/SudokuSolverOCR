@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Sudoku" Height="220" Width="250" MinHeight="220" MinWidth="250" FontFamily="Mongolian Baiti">
     <Grid Background="White">
-        <Button Content="Calculate" HorizontalAlignment="Left" Margin="60,35,0,0" VerticalAlignment="Top" Width="127" Click="RecognizePhoto_Click" Height="25" FontSize="14" Background="#FFDDDDDD"/>
+        <Button Content="Recognize and solve" HorizontalAlignment="Left" Margin="60,35,0,0" VerticalAlignment="Top" Width="127" Click="RecognizeAndSolve_Click" Height="25" FontSize="14" Background="#FFDDDDDD"/>
         <Button Content="Find game field" Margin="60,70,0,0" VerticalAlignment="Top" Click="GetField_Click" HorizontalAlignment="Left" Width="127" Height="25" FontSize="14"/>
         <Button Content="Open Sudoku board" Margin="60,105,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" Height="25" FontSize="14" Click="OpenSudokuBoardBut_Click"/>
         <Button Content="Demonstration mode" Margin="60,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" Height="25" FontSize="14" Click="DemonstrationBut_Click"/>

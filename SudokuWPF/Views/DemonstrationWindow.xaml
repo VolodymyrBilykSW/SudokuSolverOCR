@@ -12,7 +12,9 @@
         </Grid>
         <Grid Margin="0,0,0,0" Height="100" VerticalAlignment="Bottom">
             <Rectangle Fill="LightGray" />
-            <TextBlock x:Name="ExplainBox" Margin="0,0,0,0" TextAlignment="Center" TextWrapping="Wrap" FontSize="20"/>
+            <TextBlock x:Name="ExplainBox" Margin="5,5,5,5" TextAlignment="Center" TextWrapping="Wrap" FontSize="20"/>
+            <Button Content="Next" Margin="180,0,180,10" VerticalAlignment="Bottom" MinWidth="20" FontSize="20" Click="NextButton_Click"/>
+
         </Grid>
     </Grid>
 </Window>

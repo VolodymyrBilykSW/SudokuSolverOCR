@@ -140,14 +140,31 @@ namespace SudokuWPF
 
                 // stage 4
                 demWin = new Views.DemonstrationWindow() { Title = "Stage 4. Cutting field" };
-                var gameFieldImg = gameRecognizer.CutField(gameContour).Bitmap;
-                demWin.image.Source = gameFieldImg.ToImageSource();
+                var gameFieldImg = gameRecognizer.CutField(gameContour);
+                demWin.image.Source = gameFieldImg.Bitmap.ToImageSource();
                 demWin.ExplainBox.Text = "Cut game field from original photo";
                 demWin.ShowDialog();
 
                 // stage 5
-                img = new GameFieldRecognizer(gameFieldImg).Recognize();
-                var sudoku = new Sudoku(gameFieldImg) RecognizeDigits();
+                var sudoku = CellValueRecognizer.RecognizeDigits(gameFieldImg);
+
+                demWin = new Views.DemonstrationWindow() { Title = "Stage 5. Recognizing digits" };
+                Sudoku.DrawDigits(gameFieldImg, sudoku);
+                demWin.image.Source = gameFieldImg.Bitmap.ToImageSource();
+                demWin.ExplainBox.Text = "Recognized and then painted digits on the game field";
+                demWin.ShowDialog();
+
+                // stage 6
+                var solver = new SudokuSolver();
+                sudoku = solver.Calculate(sudoku);
+
+                demWin = new Views.DemonstrationWindow() { Title = "Stage 6. Solving sudoku" };
+                Sudoku.DrawDigits(gameFieldImg, sudoku);
+                demWin.image.Source = gameFieldImg.Bitmap.ToImageSource();
+                demWin.ExplainBox.Text = $"Solved unknown sudoku values for {solver.SolvingTime.ElapsedMilliseconds} ms, rekursive: {solver.RecurseDeep}";
+                demWin.ShowDialog();
+
+
             }
             catch (System.Exception error)
             {

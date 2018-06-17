@@ -24,7 +24,6 @@ namespace SudokuLibrary.ComputerVision
             return CutField(contour);
         }
 
-
         public UMat PrepareImage()
         {
             // Max size for input image, if it`s more then resize image
@@ -108,7 +107,6 @@ namespace SudokuLibrary.ComputerVision
             return resultField;
         }
 
-
         // Getting four corner points from contour points
         private PointF[] Get4CornerPoints(Point[] points)
         {
@@ -158,7 +156,6 @@ namespace SudokuLibrary.ComputerVision
             return corners;
         }
 
-
         // Get true if contour is rectangle with angles within [lowAngle, upAngle] degree. Default: [75, 105]
         private Boolean IsRectangle(PointF[] contour, Int32 lowAngle = 75, Int32 upAngle = 105, Double ratio = 0.35)
         {
@@ -190,83 +187,6 @@ namespace SudokuLibrary.ComputerVision
             }
 
             return true;
-        }
-
-
-        public Image<Bgr, Byte> TestRecognize(Bitmap bmp)
-        {
-            // Max size for input image, if it`s more then resize image
-            int MAXSIZE = Properties.Settings.Default.MAXSIZE; //2000;
-
-            // Size for output image, recommendation: multiples of 9 and 6
-            int RSIZE = Properties.Settings.Default.RSIZE; //360;
-
-            var CHAINAPPROX = Properties.Settings.Default.CHAINAPPROX;
-            var L2GRADIENT = Properties.Settings.Default.L2Gradient;
-
-            // To correct orientation of input bitmap image
-            bmp.CorectOrientation();
-
-            // Load the image from file and resize it
-            var photo = new Image<Bgr, Byte>(bmp);
-            if (photo.Width > MAXSIZE && photo.Height > MAXSIZE)
-                photo = photo.Resize(MAXSIZE, MAXSIZE * photo.Width / photo.Height, Inter.Linear, true);
-
-            // Convert the image to grayscale and filter out the noise
-            var uimage = new UMat();
-            CvInvoke.CvtColor(photo, uimage, ColorConversion.Bgr2Gray);
-
-            // Use image pyr to remove noise
-            var pyrDown = new UMat();
-            CvInvoke.PyrDown(uimage, pyrDown);
-            CvInvoke.PyrUp(pyrDown, uimage);
-
-            //CvInvoke.Dilate(uimage, uimage, CvInvoke.GetStructuringElement(ElementShape.Rectangle, new Size(1, 1), new Point(-1,-1)), new Point(-1, -1), 1, BorderType.Default, new MCvScalar(250));
-
-            var cannyEdges = new UMat();
-            CvInvoke.Canny(uimage, cannyEdges, 50.0, 100.0, 3, l2Gradient: L2GRADIENT);
-
-            // Another methods to process image, but worse. Use only one!
-            //CvInvoke.Threshold(uimage, cannyEdges, 50.0, 100.0, ThresholdType.Binary);
-            //CvInvoke.AdaptiveThreshold(uimage, cannyEdges, 50, AdaptiveThresholdType.MeanC, ThresholdType.Binary, 7, 1);
-
-            double maxRectArea = 0;
-            var biggestRectangle = new PointF[4];
-
-            using (var contours = new VectorOfVectorOfPoint())
-            {
-                // Finding contours and choosing needed
-                CvInvoke.FindContours(cannyEdges, contours, null, RetrType.Ccomp, CHAINAPPROX);
-
-                for (int i = 0; i < contours.Size; i++)
-                {
-                    if (contours[i].Size < 4)
-                        continue;
-
-                    var shape = Get4CornerPoints(contours[i].ToArray());
-                    if (IsRectangle(shape))
-                    {
-                        var rect = CvInvoke.MinAreaRect(shape);
-                        var area = rect.Size.Height * rect.Size.Width;
-
-                        if (area > maxRectArea)
-                        {
-                            maxRectArea = area;
-                            biggestRectangle = shape;
-                        }
-                    }
-                }
-            }
-
-
-            var resultField = new Image<Bgr, byte>(RSIZE, RSIZE);
-            PointF[] newCorners = { new PointF(0, 0), new PointF(RSIZE, 0), new PointF(0, RSIZE), new PointF(RSIZE, RSIZE) };
-
-            // Transformation sudoky field to rectangle size and aligning the sides
-            var M = CvInvoke.GetPerspectiveTransform(biggestRectangle, newCorners);
-            CvInvoke.WarpPerspective(photo, resultField, M, new Size(RSIZE, RSIZE));
-
-            return resultField;
         }
     }
 }

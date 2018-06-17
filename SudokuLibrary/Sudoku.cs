@@ -22,85 +22,58 @@ namespace SudokuLibrary
             Matrix = new Cell[Size, Size];
 
             Field = new GameFieldRecognizer(image).Recognize();
-            RecognizeDigits();
+            Matrix = CellValueRecognizer.RecognizeDigits(Field, Size);
             Matrix = new SudokuSolver().Calculate(Matrix);
         }
 
-        public Sudoku() { }
-
-
-        public Bitmap GetResultImage()
-        {
-            DrawDigits();
-
-            return Field.ToBitmap();
-        }
-
-        // Get digits from sudoky image field.
-        private void RecognizeDigits()
-        {
-            int width = Field.Width / Size;
-            int offset = width / 6;
-
-            for (int yi = 0; yi < Size; yi++)
-            {
-                for (int xi = 0; xi < Size; xi++)
-                {
-                    // get image from centre cell
-                    Matrix[xi, yi].Rect = new Rectangle(offset + width * xi, offset + width * yi, width - offset * 2, width - offset * 2);
-
-                    // recognize digit from cell
-                    int digit = CellValueRecognizer.Recognize(Field.GetSubRect(Matrix[xi, yi].Rect));
-
-                    if (digit == 0)
-                        continue;
-
-                    if (!Matrix.IsPossible(xi, yi, digit))
-                       throw new Exception($"Recognition error. Don`t possible value at cell [{xi},{yi}]");
-
-                    Matrix[xi, yi].Value = digit;
-                    Matrix[xi, yi].Preset = true;
-                }
-            }
-        }
-
         // Drawing preset and calculation values on the Field.
-        public void DrawDigits()
+        public static void DrawDigits(Image<Bgr, Byte> field, Cell[,] matrix)
         {
             var FONT = Properties.Settings.Default.FONT;
             var FONTSIZE = Properties.Settings.Default.FONTSIZE;
             var FONTSIZEPR = Properties.Settings.Default.FONTSIZEPR;
 
-            for (int yi = 0; yi < Size; yi++)
+            for (int yi = 0; yi < matrix.GetLength(0); yi++)
             {
-                for (int xi = 0; xi < Size; xi++)
+                for (int xi = 0; xi < matrix.GetLength(0); xi++)
                 {
-                    var leftBottom = new Point(Matrix[xi, yi].Rect.Left, Matrix[xi, yi].Rect.Bottom);
+                    if(matrix[xi, yi].Value == 0)
+                    {
+                        continue;
+                    }
 
-                    if (Matrix[xi, yi].Preset)
+                    var leftBottom = new Point(matrix[xi, yi].Rect.Left, matrix[xi, yi].Rect.Bottom);
+
+                    if (matrix[xi, yi].Preset)
                     {
                         // draw preset values
-                        Field.Draw(Matrix[xi, yi].Rect, new Bgr(Color.Red), 1);
-                        Field.Draw(Matrix[xi, yi].Value.ToString(), leftBottom, FONT, FONTSIZEPR, new Bgr(Color.Red));
+                        field.Draw(matrix[xi, yi].Rect, new Bgr(Color.Red), 1);
+                        field.Draw(matrix[xi, yi].Value.ToString(), leftBottom, FONT, FONTSIZEPR, new Bgr(Color.Red));
                     }
                     else
                     {
                         // draw calculated values
-                        Field.Draw(Matrix[xi, yi].Value.ToString(), leftBottom, FONT, FONTSIZE, new Bgr(Color.Green));
+                        field.Draw(matrix[xi, yi].Value.ToString(), leftBottom, FONT, FONTSIZE, new Bgr(Color.Green));
                     }
                 }
             }
         }
 
+        public Bitmap GetResultImage()
+        {
+            DrawDigits(Field, Matrix);
 
-        public Bitmap GetLightResult()
+            return Field.ToBitmap();
+        }
+
+        public Bitmap GetLightImageResult()
         {
             const int SIZE = 271;
             const int KVADRANT = SIZE / 9;
             var resultImage = new Image<Bgr, byte>(SIZE, SIZE, new Bgr(Color.White));
 
 
-            // Drawing empty field
+            // Drawing field on the empty image
             for (int i = 0; i <= SIZE; i += KVADRANT)
             {
                 int thickness = 1;
@@ -114,7 +87,7 @@ namespace SudokuLibrary
                 resultImage.DrawPolyline(points, false, new Bgr(Color.Black), thickness);
             }
 
-            // Drawing digits
+            // Drawing digits on the image
             for (int yi = 0; yi < Size; yi++)
             {
                 for (int xi = 0; xi < Size; xi++)
@@ -123,12 +96,12 @@ namespace SudokuLibrary
 
                     if (Matrix[xi, yi].Preset)
                     {
-                        // draw preset values
+                        // drawing preset values
                         resultImage.Draw(Matrix[xi, yi].Value.ToString(), leftBottom, FontFace.HersheyPlain, 2, new Bgr(Color.Black));
                     }
                     else
                     {
-                        // draw calculated values
+                        // drawing calculated values
                         resultImage.Draw(Matrix[xi, yi].Value.ToString(), leftBottom, FontFace.HersheyPlain, 2, new Bgr(Color.Green));
                     }
                 }

@@ -42,7 +42,7 @@ namespace SudokuBot
 
 
                     // Processing image
-                    var resImg = new Sudoku(bmp).GetLightResult();
+                    var resImg = new Sudoku(bmp).GetLightImageResult();
 
                     // Add result image to attachment
                     var converter = new ImageConverter();

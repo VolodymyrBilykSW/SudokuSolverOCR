@@ -14,14 +14,16 @@ using System.Windows.Shapes;
 
 namespace SudokuWPF.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для DemonstrationWindow.xaml
-    /// </summary>
     public partial class DemonstrationWindow : Window
     {
         public DemonstrationWindow()
         {
             InitializeComponent();
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

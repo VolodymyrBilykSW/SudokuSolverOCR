@@ -29,7 +29,7 @@ namespace SudokuLibrary.ComputerVision
         }
 
 
-        private static Cell[,] RecognizeDigits(Image<Bgr, Byte> field, int size)
+        public static Cell[,] RecognizeDigits(Image<Bgr, Byte> field, int size = 9)
         {
             var matrix = new Cell[size, size];
 
@@ -44,7 +44,7 @@ namespace SudokuLibrary.ComputerVision
                     matrix[xi, yi].Rect = new Rectangle(offset + width * xi, offset + width * yi, width - offset * 2, width - offset * 2);
 
                     // recognize digit from cell
-                    int digit = CellValueRecognizer.Recognize(field.GetSubRect(matrix[xi, yi].Rect));
+                    int digit = CellValueRecognizer.RecognizeCellNumber(field.GetSubRect(matrix[xi, yi].Rect));
 
                     if (digit == 0)
                         continue;
@@ -60,7 +60,7 @@ namespace SudokuLibrary.ComputerVision
             return matrix;
         }
 
-        public static int Recognize(Image<Bgr, Byte> cellImg)
+        private static int RecognizeCellNumber(Image<Bgr, Byte> cellImg)
         {
             // Convert the image to grayscale and filter out the noise
             Mat imgGrey = new Mat();

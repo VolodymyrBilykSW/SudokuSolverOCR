@@ -102,7 +102,7 @@ namespace SudokuLibrary
                     if (Matrix[xi, yi].Preset)
                     {
                         // drawing preset values
-                        resultImage.Draw(Matrix[xi, yi].Value.ToString(), leftBottom, FontFace.HersheyPlain, 2, new Bgr(Color.Black));
+                        resultImage.Draw(Matrix[xi, yi].Value.ToString(), leftBottom, FontFace.HersheyPlain, 1, new Bgr(Color.Red));
                     }
                     else
                     {

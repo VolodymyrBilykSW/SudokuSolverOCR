@@ -29,5 +29,11 @@
     <Setting Name="CHAINAPPROX" Type="Emgu.CV.CvEnum.ChainApproxMethod" Scope="Application">
       <Value Profile="(Default)">ChainApproxNone</Value>
     </Setting>
+    <Setting Name="THOCR_MIN" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">120</Value>
+    </Setting>
+    <Setting Name="THOCR_MAX" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">255</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

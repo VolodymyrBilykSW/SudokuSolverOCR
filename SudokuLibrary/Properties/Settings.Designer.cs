@@ -8,26 +8,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SudokuLibrary.Properties {
-    
-    
+namespace SudokuLibrary.Properties
+{
+
+
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
-    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        
-        public static Settings Default {
-            get {
+
+        public static Settings Default
+        {
+            get
+            {
                 return defaultInstance;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2000")]
-        public int MAXSIZE {
-            get {
+        public int MAXSIZE
+        {
+            get
+            {
                 return ((int)(this["MAXSIZE"]));
             }
             set
@@ -35,12 +41,14 @@ namespace SudokuLibrary.Properties {
                 this["MAXSIZE"] = value;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("360")]
-        public int RSIZE {
-            get {
+        public int RSIZE
+        {
+            get
+            {
                 return ((int)(this["RSIZE"]));
             }
             set
@@ -48,12 +56,14 @@ namespace SudokuLibrary.Properties {
                 this["RSIZE"] = value;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int TRESHOLD_MIN {
-            get {
+        public int TRESHOLD_MIN
+        {
+            get
+            {
                 return ((int)(this["TRESHOLD_MIN"]));
             }
             set
@@ -61,12 +71,14 @@ namespace SudokuLibrary.Properties {
                 this["TRESHOLD_MIN"] = value;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        public int TRESHOLD_MAX {
-            get {
+        public int TRESHOLD_MAX
+        {
+            get
+            {
                 return ((int)(this["TRESHOLD_MAX"]));
             }
             set
@@ -74,12 +86,14 @@ namespace SudokuLibrary.Properties {
                 this["TRESHOLD_MAX"] = value;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool L2Gradient {
-            get {
+        public bool L2Gradient
+        {
+            get
+            {
                 return ((bool)(this["L2Gradient"]));
             }
             set
@@ -87,12 +101,14 @@ namespace SudokuLibrary.Properties {
                 this["L2Gradient"] = value;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("HersheyPlain")]
-        public global::Emgu.CV.CvEnum.FontFace FONT {
-            get {
+        public global::Emgu.CV.CvEnum.FontFace FONT
+        {
+            get
+            {
                 return ((global::Emgu.CV.CvEnum.FontFace)(this["FONT"]));
             }
             set
@@ -100,12 +116,14 @@ namespace SudokuLibrary.Properties {
                 this["FONT"] = value;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int FONTSIZE {
-            get {
+        public int FONTSIZE
+        {
+            get
+            {
                 return ((int)(this["FONTSIZE"]));
             }
             set
@@ -113,12 +131,14 @@ namespace SudokuLibrary.Properties {
                 this["FONTSIZE"] = value;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int FONTSIZEPR {
-            get {
+        public int FONTSIZEPR
+        {
+            get
+            {
                 return ((int)(this["FONTSIZEPR"]));
             }
             set
@@ -126,17 +146,50 @@ namespace SudokuLibrary.Properties {
                 this["FONTSIZEPR"] = value;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ChainApproxNone")]
-        public global::Emgu.CV.CvEnum.ChainApproxMethod CHAINAPPROX {
-            get {
+        public global::Emgu.CV.CvEnum.ChainApproxMethod CHAINAPPROX
+        {
+            get
+            {
                 return ((global::Emgu.CV.CvEnum.ChainApproxMethod)(this["CHAINAPPROX"]));
             }
             set
             {
                 this["CHAINAPPROX"] = value;
+            }
+        }
+
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int THOCR_MIN
+        {
+            get
+            {
+                return ((int)(this["THOCR_MIN"]));
+            }
+            set
+            {
+                this["THOCR_MIN"] = value;
+            }
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
+        public int THOCR_MAX
+        {
+            get
+            {
+                return ((int)(this["THOCR_MAX"]));
+            }
+            set
+            {
+                this["THOCR_MAX"] = value;
             }
         }
     }

@@ -53,6 +53,9 @@ namespace SudokuWPF
 
             CHAINAPPROX.ItemsSource = Enum.GetValues(typeof(Emgu.CV.CvEnum.ChainApproxMethod));
             CHAINAPPROX.SelectedItem = setts.CHAINAPPROX;
+
+            THOCR_MIN.Text = setts.THOCR_MIN.ToString();
+            THOCR_MAX.Text = setts.THOCR_MAX.ToString();
         }
 
         private void Apply()
@@ -69,6 +72,9 @@ namespace SudokuWPF
             setts.FONTSIZEPR = Int32.Parse(FONTSIZEPR.Text);
 
             setts.CHAINAPPROX = (Emgu.CV.CvEnum.ChainApproxMethod)CHAINAPPROX.SelectedItem;
+
+            setts.THOCR_MIN = Int32.Parse(THOCR_MIN.Text);
+            setts.THOCR_MAX = Int32.Parse(THOCR_MAX.Text);
 
             setts.Save();
             this.Close();

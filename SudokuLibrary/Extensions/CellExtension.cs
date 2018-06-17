@@ -104,9 +104,6 @@ namespace SudokuLibrary.Extensions
                 {
                     if ((matrix[i, j].Value > 9) || (matrix[i, j].Value < 1))
                         return false;
-
-                    if (!matrix.IsPossible(i, j, matrix[i, j].Value))
-                        return false;
                 }
             }
 

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SudokuWPF"
         mc:Ignorable="d"
-        Title="Settings" MinHeight="380" MinWidth="280" Height="380" Width="280" MaxHeight="380" MaxWidth="280">
-    <Grid>
+        Title="Settings" MinHeight="460" MinWidth="300" Height="460" Width="300" MaxHeight="460" MaxWidth="300">
+    <Grid Margin="10,0,10,0">
         <Label Content="Settings for recognition game field:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" FontWeight="Bold" Height="24" Width="178" Margin="2,1,0,0"/>
         <Label Content="Maximum side of input image:" HorizontalAlignment="Left" Margin="20,21,0,0" VerticalAlignment="Top" FontSize="10" Height="24" Width="144"/>
         <TextBox Name="MAXSIZE" HorizontalAlignment="Left" Height="18" Margin="165,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" PreviewTextInput="NumberValidationTextBox"/>
@@ -28,17 +28,23 @@
         <Label Content="ChainApprox method: " HorizontalAlignment="Left" Margin="20,176,0,0" VerticalAlignment="Top" FontSize="10" Height="24" Width="110"/>
         <ComboBox x:Name="CHAINAPPROX" HorizontalAlignment="Left" Margin="125,175,0,0" VerticalAlignment="Top" Width="120" Height="20"/>
 
-        <Label Content="Font settings:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" FontWeight="Bold" Margin="-3,205,0,0" Height="24" Width="74"/>
-        <Label Content="Font: " HorizontalAlignment="Left" Margin="20,226,0,0" VerticalAlignment="Top" FontSize="10" Height="24" Width="35"/>
-        <ComboBox Name="FONT" HorizontalAlignment="Left" Margin="50,225,0,0" VerticalAlignment="Top" Width="120" Height="20"/>
+        <Label Content="Font settings:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" FontWeight="Bold" Margin="1,278,0,0" Height="24" Width="74"/>
+        <Label Content="Font: " HorizontalAlignment="Left" Margin="24,299,0,0" VerticalAlignment="Top" FontSize="10" Height="24" Width="35"/>
+        <ComboBox Name="FONT" HorizontalAlignment="Left" Margin="54,298,0,0" VerticalAlignment="Top" Width="120" Height="20"/>
 
-        <Label Content="Font size (for calculated values): " HorizontalAlignment="Left" Margin="20,250,0,0" VerticalAlignment="Top" FontSize="10" Height="24" Width="152"/>
-        <TextBox Name="FONTSIZE" HorizontalAlignment="Left" Height="18" Margin="170,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" PreviewTextInput="NumberValidationTextBox"/>
+        <Label Content="Font size (for calculated values): " HorizontalAlignment="Left" Margin="24,323,0,0" VerticalAlignment="Top" FontSize="10" Height="24" Width="152"/>
+        <TextBox Name="FONTSIZE" HorizontalAlignment="Left" Height="18" Margin="174,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" PreviewTextInput="NumberValidationTextBox"/>
 
-        <Label Content="Font size (for calculated values): " HorizontalAlignment="Left" Margin="20,271,0,0" VerticalAlignment="Top" FontSize="10" Height="24" Width="152"/>
-        <TextBox Name="FONTSIZEPR" HorizontalAlignment="Left" Height="18" Margin="170,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" PreviewTextInput="NumberValidationTextBox"/>
+        <Label Content="Font size (for calculated values): " HorizontalAlignment="Left" Margin="24,344,0,0" VerticalAlignment="Top" FontSize="10" Height="24" Width="152"/>
+        <TextBox Name="FONTSIZEPR" HorizontalAlignment="Left" Height="18" Margin="174,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" PreviewTextInput="NumberValidationTextBox"/>
 
-        <Button Content="Apply" HorizontalAlignment="Left" Margin="50,316,0,0" VerticalAlignment="Top" Width="75" Click="ApplyButton_Click" Height="19"/>
-        <Button Content="Default" HorizontalAlignment="Left" Margin="135,316,0,0" VerticalAlignment="Top" Width="75" Click="ResetButton_Click" Height="19"/>
+        <Button Content="Apply" HorizontalAlignment="Left" Margin="54,393,0,0" VerticalAlignment="Top" Width="75" Click="ApplyButton_Click" Height="19"/>
+        <Button Content="Default" HorizontalAlignment="Left" Margin="139,393,0,0" VerticalAlignment="Top" Width="75" Click="ResetButton_Click" Height="19"/>
+        
+        <Label Content="OCR threshold algorithm setting:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" FontWeight="Bold" Margin="0,205,0,0" Height="24" Width="167"/>
+        <Label Content="Threshold min:" HorizontalAlignment="Left" Margin="17,226,0,0" VerticalAlignment="Top" FontSize="10" Height="25" Width="75"/>
+        <TextBox x:Name="THOCR_MIN" HorizontalAlignment="Left" Height="18" Margin="92,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" PreviewTextInput="NumberValidationTextBox"/>
+        <Label Content="Threshold max:" HorizontalAlignment="Left" Margin="17,246,0,0" VerticalAlignment="Top" FontSize="10" Height="24" Width="77"/>
+        <TextBox x:Name="THOCR_MAX" HorizontalAlignment="Left" Height="18" Margin="92,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" PreviewTextInput="NumberValidationTextBox"/>
     </Grid>
 </Window>

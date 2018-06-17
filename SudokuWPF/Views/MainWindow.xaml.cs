@@ -40,10 +40,10 @@ namespace SudokuWPF
                 try
                 {
                     var bmp = new Bitmap(openImage.FileName);
-                    var resImg = new Sudoku(bmp).GetResultImage();
+                    var sudoku = new Sudoku(bmp);
 
-                    var resultWin = new ImageViewer() { Title = "Answer" };
-                    resultWin.image.Source = resImg.ToImageSource();
+                    var resultWin = new ImageViewer() { Title = $"Answer, solving for {sudoku.SolvingTime} ms" };
+                    resultWin.image.Source = sudoku.GetResultImage().ToImageSource();
                     resultWin.Show();
                 }
                 catch (System.Exception error)
@@ -155,15 +155,34 @@ namespace SudokuWPF
                 demWin.ShowDialog();
 
                 // stage 6
-                var solver = new SudokuSolver();
-                sudoku = solver.Calculate(sudoku);
+                var solver = new SudokuSolver(sudoku);
 
+                bool run = true;
+                while (run)
+                {
+                    run = solver.FindOnePossible();
+
+                    if (run == false)
+                        run = solver.FindOnlyHere();
+                }
+                
                 demWin = new Views.DemonstrationWindow() { Title = "Stage 6. Solving sudoku" };
-                Sudoku.DrawDigits(gameFieldImg, sudoku);
+                Sudoku.DrawDigits(gameFieldImg, solver.Matrix);
                 demWin.image.Source = gameFieldImg.Bitmap.ToImageSource();
-                demWin.ExplainBox.Text = $"Solved unknown sudoku values for {solver.SolvingTime.ElapsedMilliseconds} ms, rekursive: {solver.RecurseDeep}";
+                demWin.ExplainBox.Text = $"Solved unknown sudoku values using simple methods";
                 demWin.ShowDialog();
 
+                if(!solver.Matrix.IsSolved())
+                {
+                    // stage 7
+                    solver.RecursiveMethod();
+
+                    demWin = new Views.DemonstrationWindow() { Title = "Stage 7. Solving sudoku, part 2" };
+                    Sudoku.DrawDigits(gameFieldImg, solver.Matrix);
+                    demWin.image.Source = gameFieldImg.Bitmap.ToImageSource();
+                    demWin.ExplainBox.Text = $"Solved of the remaining unknown sudoku values using recursive method";
+                    demWin.ShowDialog();
+                }
 
             }
             catch (System.Exception error)

@@ -8,15 +8,19 @@ namespace SudokuLibrary
         public int RecurseDeep { get; private set; } = 0;
         public Stopwatch SolvingTime { get; private set; } = new Stopwatch();
 
-        private Cell[,] Matrix;
+        public Cell[,] Matrix { get; private set; }
 
-        public Cell[,] Calculate(Cell[,] matrix)
+
+        public SudokuSolver(Cell[,] matrix)
         {
             Matrix = matrix;
 
             // Creation list of possible values.
             Matrix.CreatePossible();
+        }
 
+        public Cell[,] Calculate()
+        {
             bool run = true;
 
             SolvingTime.Start();
@@ -40,7 +44,7 @@ namespace SudokuLibrary
 
 
         // Find and write cell where is only one possible value.
-        private bool FindOnePossible()
+        public bool FindOnePossible()
         {
             bool isChanges = false;
 
@@ -65,7 +69,7 @@ namespace SudokuLibrary
         }
 
         // Find value which can be only in one cell of row, column or kvadrant.
-        private bool FindOnlyHere()
+        public bool FindOnlyHere()
         {
             bool isChanges = false;
 
@@ -133,7 +137,7 @@ namespace SudokuLibrary
         }
 
         // Try all combinations.
-        private bool RecursiveMethod(int step = 0)
+        public bool RecursiveMethod(int step = 0)
         {
             RecurseDeep++;
 

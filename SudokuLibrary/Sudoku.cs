@@ -15,6 +15,8 @@ namespace SudokuLibrary
 
         public int Size { get; private set; }
 
+        public long SolvingTime { get; private set; }
+
 
         public Sudoku(Bitmap image, int size = 9)
         {
@@ -23,7 +25,10 @@ namespace SudokuLibrary
 
             Field = new GameFieldRecognizer(image).Recognize();
             Matrix = CellValueRecognizer.RecognizeDigits(Field, Size);
-            Matrix = new SudokuSolver().Calculate(Matrix);
+
+            var solver = new SudokuSolver(Matrix);
+            Matrix = solver.Calculate();
+            SolvingTime = solver.SolvingTime.ElapsedMilliseconds;
         }
 
         // Drawing preset and calculation values on the Field.

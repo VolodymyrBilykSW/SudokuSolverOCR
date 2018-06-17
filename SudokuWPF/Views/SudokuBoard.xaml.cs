@@ -20,8 +20,8 @@ namespace SudokuWPF.Views
             try
             {
                 var cells = ReadValues();
-                var solver = new SudokuSolver();
-                cells = solver.Calculate(cells);
+                var solver = new SudokuSolver(cells);
+                cells = solver.Calculate();
 
                 this.Title = $"Sudoku (Time: {solver.SolvingTime.ElapsedMilliseconds}ms)";
                 WriteValues(cells);                

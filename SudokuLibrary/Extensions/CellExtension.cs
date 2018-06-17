@@ -94,5 +94,23 @@ namespace SudokuLibrary.Extensions
 
             return true;
         }
+
+
+        public static bool IsSolved(this Cell[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(0); j++)
+                {
+                    if ((matrix[i, j].Value > 9) || (matrix[i, j].Value < 1))
+                        return false;
+
+                    if (!matrix.IsPossible(i, j, matrix[i, j].Value))
+                        return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

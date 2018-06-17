@@ -50,8 +50,8 @@ namespace SudokuLibrary.ComputerVision
                     if (digit == 0)
                         continue;
 
-                    if (!matrix.IsPossible(xi, yi, digit))
-                        throw new Exception($"Recognition error. Don`t possible value at cell [{xi},{yi}]");
+                    //if (!matrix.IsPossible(xi, yi, digit))
+                    //    throw new Exception($"Recognition error. Don`t possible value at cell [{xi},{yi}]");
 
                     matrix[xi, yi].Value = digit;
                     matrix[xi, yi].Preset = true;
@@ -68,8 +68,10 @@ namespace SudokuLibrary.ComputerVision
             CvInvoke.CvtColor(cellImg, imgGrey, ColorConversion.Bgr2Gray);
 
             // TODO: can be problem with values for some image
+            // Another methods to process image, but worse. Use only one!
             Mat imgThresholded = new Mat();
-            CvInvoke.Threshold(imgGrey, imgThresholded, 170, 255, ThresholdType.Binary);
+            CvInvoke.Threshold(imgGrey, imgThresholded, 120, 255, ThresholdType.Binary);
+            //CvInvoke.AdaptiveThreshold(imgGrey, imgThresholded, 255, AdaptiveThresholdType.GaussianC, ThresholdType.Binary, 51, -1);
 
             _ocr.SetImage(imgThresholded);
 

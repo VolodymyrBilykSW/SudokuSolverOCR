@@ -4,6 +4,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Util;
+using SudokuLibrary.Extensions;
 
 namespace SudokuLibrary.ComputerVision
 {

@@ -67,7 +67,7 @@ namespace SudokuWPF
             {
                 try
                 {
-                    var field = new GameFieldRecognizer(new Bitmap(openImage.FileName)).TestRecognize(new Bitmap(openImage.FileName));
+                    var field = new GameFieldRecognizer(new Bitmap(openImage.FileName)).Recognize();
 
                     var fieldWin = new ImageViewer() { Title = "Game field" };
                     fieldWin.image.Source = field.ToBitmapSource();

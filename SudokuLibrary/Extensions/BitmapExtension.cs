@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace SudokuLibrary
+namespace SudokuLibrary.Extensions
 {
     public static class BitmapExtension
     {

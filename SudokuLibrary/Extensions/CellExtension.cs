@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SudokuLibrary
+namespace SudokuLibrary.Extensions
 {
     public static class CellsExtension
     {

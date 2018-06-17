@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using SudokuLibrary.Extensions;
 
 namespace SudokuLibrary
 {
